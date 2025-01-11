@@ -1,14 +1,21 @@
 version: '3.8'
 services:
   commandsApp:
-    image: python:3.8-slim-bullseye
-    command: "tail -f /dev/null"
+    image: facturedtest/commandapp
+    build:
+      context: .
+      dockerfile: ./dockerfiles/commandapp.dockerfile      
+    command: bash "/apps/commandApp/entrypoint.sh"
     ports:
       - 8000:8000
     volumes:
       - ./commandApp:/apps/commandApp
     environment:
       - TZ=America/El_Salvador
+      - DB_NAME=facturedtest
+      - DB_USER=facturedtest
+      - DB_PASSWORD=facturedtest
+      - DB_PORT=5432
     depends_on:
       - postgresqldbfr
     restart: unless-stopped
