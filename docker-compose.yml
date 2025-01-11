@@ -1,0 +1,27 @@
+version: '3.8'
+services:
+  commandsApp:
+    image: python:3.8-slim-bullseye
+    command: "tail -f /dev/null"
+    ports:
+      - 8000:8000
+    volumes:
+      - ./commandApp:/apps/commandApp
+    environment:
+      - TZ=America/El_Salvador
+    depends_on:
+      - postgresqldbfr
+    restart: unless-stopped
+    
+
+  postgresqldbfr:
+    image: postgres:16.6-alpine3.21
+    environment:
+      POSTGRES_PASSWORD: facturedtest
+      POSTGRES_USER: facturedtest
+      POSTGRES_DB: facturedtest
+    ports:
+      - 5433:5432
+#  querysApp:
+#  apitGatewayAPP:
+#  mongodb:
