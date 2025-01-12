@@ -30,7 +30,9 @@ class TablerosModify(APIView):
         tablero_serializer = TablerosSerializer(tablero, data= request.data)
         if tablero_serializer.is_valid():
             tablero_serializer.save()
-        return Response({"status": "ok", "description":"Tablero actualiza correctamente."}, status.HTTP_200_OK)
+        else:
+            return Response(tablero_serializer.errors, status=status.HTTP_400_BAD_REQUEST)
+        return Response({"status": "ok", "description":"Tablero actualiza correctamente.","data":tablero_serializer.data}, status.HTTP_200_OK)
     
     def delete(self, request, pk):
         print(request.data)
