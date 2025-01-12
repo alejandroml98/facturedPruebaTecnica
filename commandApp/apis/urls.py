@@ -1,6 +1,6 @@
 from django.urls import path
 
-from . import tableros_views, tareas_views
+from . import tableros_views, tareas_views, seeder_views
 
 urlpatterns = [
     #path("", views.index, name="index"),
@@ -11,4 +11,7 @@ urlpatterns = [
     #URL Tareas
     path("tarea", tareas_views.TareasCreate.as_view(), name="tareas_create"),
     path("tarea/<int:pk>", tareas_views.TareasModify.as_view(), name='tareas_modify'),
+
+    #URL seeder
+    path("seeder", seeder_views.SeederView.as_view(), name="seeder"),
 ]
