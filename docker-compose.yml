@@ -34,6 +34,25 @@ services:
       interval: 10s
       timeout: 3s
       retries: 3
-#  querysApp:
+  
+  querysApp:
+    image: facturedtest/queryapp
+    build:
+      context: .
+      dockerfile: ./dockerfiles/queryapp.dockerfile      
+    command: bash "/apps/queryApp/entrypoint.sh"
+    ports:
+      - 8001:8000
+    volumes:
+      - ./queryApp:/apps/queryApp
+    environment:
+      - TZ=America/El_Salvador
+      - mongodb
+    restart: unless-stopped
+
+  mongodb:
+    image: mongodb/mongodb-community-server
+    ports:
+      - 27017:27017
+
 #  apitGatewayAPP:
-#  mongodb:
