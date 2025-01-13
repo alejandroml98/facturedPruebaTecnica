@@ -11,5 +11,6 @@ RUN pip install pipenv
 WORKDIR /apps/commandApp
 
 # instalar dependencias de proyecto
-#COPY ./commandApp/Pipfile ./django-project/Pipfile.lock ./
-#RUN pipenv install --system --deploy
+COPY ./commandApp/requirements.txt /apps/commandApp/requirements.txt
+
+RUN pip install -r requirements.txt
