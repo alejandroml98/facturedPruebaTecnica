@@ -14,10 +14,14 @@ services:
       - TZ=America/El_Salvador
       - DB_NAME=facturedtest
       - DB_USER=facturedtest
-      - DB_PASSWORD=facturedtest
       - DB_PORT=5432
+      - RABBITMQ_QUEUE=db_sync_queue
+      - RABBITMQ_HOST = rabbitmqfr
     depends_on:
-      - postgresqldbfr
+      postgresqldbfr:
+        condition: service_healthy
+      rabbitmqfr:
+        condition: service_healthy
     restart: unless-stopped
     
 
@@ -35,6 +39,7 @@ services:
       timeout: 3s
       retries: 3
   
+
   querysApp:
     image: facturedtest/queryapp
     build:
@@ -47,12 +52,42 @@ services:
       - ./queryApp:/apps/queryApp
     environment:
       - TZ=America/El_Salvador
-      - mongodb
     restart: unless-stopped
+
 
   mongodb:
     image: mongodb/mongodb-community-server
     ports:
       - 27017:27017
+
+
+  syncDBApp:
+    image: facturedtest/syncdbapp
+    command: bash "/apps/syncDBApp/entrypoint.sh"
+    build:
+      context: .
+      dockerfile: ./dockerfiles/syncdbapp.dockerfile 
+    volumes:
+      - ./syncDBApp:/apps/syncDBApp
+    environment:
+      - TZ=America/El_Salvador
+      - RABBITMQ_QUEUE=db_sync_queue
+      - RABBITMQ_HOST = rabbitmqfr
+    depends_on:
+      rabbitmqfr:
+        condition: service_healthy
+    restart: unless-stopped
+
+
+  rabbitmqfr:
+    image: rabbitmq:4-management-alpine
+    expose:
+      - 5672
+    healthcheck:
+      test: rabbitmq-diagnostics -q ping
+      interval: 30s
+      timeout: 30s
+      retries: 3
+    restart: unless-stopped
 
 #  apitGatewayAPP:
