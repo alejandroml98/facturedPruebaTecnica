@@ -18,7 +18,8 @@ class SeederView(APIView):
         try:
             seed(cantidad_tableros, cantidad_tareas)
             return Response({"status": "ok", "description":"seeder completado"}, status.HTTP_201_CREATED)
-        except Exception:
+        except Exception as e:
+            print(e)
             return Response({"status": "error", "description":"seeder no se completo"}, status=status.HTTP_400_BAD_REQUEST)
             
         

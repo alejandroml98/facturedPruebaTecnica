@@ -9,7 +9,11 @@ from apis.models import Tableros, Tareas
 from apis.enums import EstadostareaEnum
 
 #Serializer
-from apis.serializer import TablerosSerializer, TareasSerializer
+from apis.serializer import TablerosSerializer, TareasSerializer, TableroConTareasSerializer
+
+#Services
+from apis.services import rabbitmq_data_transform
+from apis.rabbitmq_producer import send_message
 
 def seed(cantidad_tableros, cantidad_tareas):
     tableros_data = seeder_tableros(cantidad_tableros)
@@ -31,6 +35,8 @@ def seed(cantidad_tableros, cantidad_tareas):
             print(future.result())
 
         print("finalizando seeder.")
+        seeder_sync_rabbitmq()
+        print("finalizando seeder mongodb.")
     
 
 
@@ -59,7 +65,7 @@ def seeder_tareas(cantidad_tareas, lista_tableros):
         data = {
             "titulo": "Titulo "+ faker.name(),
             "descripcion": "Descripcion "+ faker.text(30),
-            "estado": random.choice([i.name for i in EstadostareaEnum]),
+            "estado": random.choice([i.value for i in EstadostareaEnum]),
             "id_tablero": int(random.choice(lista_tableros))
         }
         tareas_data.append(data)
@@ -74,4 +80,17 @@ def seeder_tareas(cantidad_tareas, lista_tableros):
     else:
         print("error")
     
+def seeder_sync_rabbitmq():
+    tableros_ids_list = Tableros.objects.all().values_list("id", flat=True)
+
+    try:
+        for id in tableros_ids_list:
+            tablero=Tableros.objects.prefetch_related('tareas').get(pk=id)
+            tablero_serializer = TableroConTareasSerializer(tablero)
+            rabbitmq_data = rabbitmq_data_transform("post","seeder",tablero_serializer.data, None)
+            send_message(rabbitmq_data)
+        pass
+    except Exception as e:
+        print(e)
+
 

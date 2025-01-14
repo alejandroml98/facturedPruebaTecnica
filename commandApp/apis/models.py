@@ -15,7 +15,7 @@ class Tareas(models.Model):
     estado = models.CharField(max_length=50)
     fecha_creacion = models.DateTimeField(auto_now_add=True)
     #Llave foranea con tabla "Tableros"
-    id_tablero = models.ForeignKey(Tableros, on_delete=models.CASCADE)
+    id_tablero = models.ForeignKey(Tableros, related_name="tareas", on_delete=models.CASCADE)
 
     class Meta:
         db_table = 'TAREAS'
