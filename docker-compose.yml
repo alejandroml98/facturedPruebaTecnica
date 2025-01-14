@@ -92,4 +92,19 @@ services:
       retries: 3
     restart: unless-stopped
 
-#  apitGatewayAPP:
+  apitGatewayAPP:
+    image: facturedtest/apigateway
+    build:
+      context: .
+      dockerfile: ./dockerfiles/apigateway.dockerfile      
+    command: bash "/apps/ApiGateway/entrypoint.sh"
+    ports:
+      - 8002:8000
+    volumes:
+      - ./ApiGateway:/apps/ApiGateway
+    environment:
+      - TZ=America/El_Salvador
+    depends_on:
+      - querysApp
+      - commandsApp
+    restart: unless-stopped
