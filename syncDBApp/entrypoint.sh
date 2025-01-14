@@ -1,1 +1,3 @@
-tail -f /dev/null
+#tail -f /dev/null
+
+python consumer.py

@@ -1,6 +1,6 @@
 from mongodb_connection import MongoDBClient
 
-mongo_client = MongoDBClient(uri="mongodb://localhost:27017/", database_name="facturedtest")
+mongo_client = MongoDBClient(uri="mongodb://mongodb:27017/", database_name="facturedtest")
 
 tareas_collection= mongo_client.get_collection("tareas_collection")
 

@@ -11,6 +11,6 @@ RUN pip install pipenv
 WORKDIR /apps/queryApp
 
 # instalar dependencias de proyecto
-#COPY ./queryApp/requirements.txt /apps/queryApp/requirements.txt
+COPY ./queryApp/requirements.txt /apps/queryApp/requirements.txt
 
-#RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt

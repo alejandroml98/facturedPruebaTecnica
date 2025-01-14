@@ -28,7 +28,6 @@ class TareasCreate(APIView):
         
 class TareasModify(APIView):
     def put(self, request, pk):
-        print(request.data)
         try:
             Tarea = Tareas.objects.get(pk=pk)
         except Tareas.DoesNotExist:

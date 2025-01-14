@@ -11,6 +11,6 @@ RUN pip install pipenv
 WORKDIR /apps/syncDBApp
 
 # instalar dependencias de proyecto
-#COPY ./commandApp/requirements.txt /apps/commandApp/requirements.txt
+COPY ./syncDBApp/requirements.txt /apps/syncDBApp/requirements.txt
 
-#RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt
