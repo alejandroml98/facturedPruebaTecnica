@@ -1,0 +1,578 @@
+{
+	"info": {
+		"_postman_id": "3afb6f09-0306-4224-bf7b-b09118c3488d",
+		"name": "Factured Test",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "11753978"
+	},
+	"item": [
+		{
+			"name": "commands",
+			"item": [
+				{
+					"name": "tablero_create",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientId",
+									"value": "facturedtest",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "password_credentials",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "facturedtest",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "facturedtest",
+									"type": "string"
+								},
+								{
+									"key": "clientSecret",
+									"value": "facturedtest",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "facturedtest",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "http://localhost:8002/oauth/token/",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"nombre\": \"tablero nuevo\",\r\n    \"descripcion\": \"Descripcion tablero nuevo\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}apis/tablero",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tablero"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tablero_update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"descripcion\": \"Descripcion tablero 1 mod\",\r\n    \"nombre\": \"Nombre tablero 1 mod\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}apis/tablero/16",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tablero",
+								"16"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tablero_delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}apis/tablero/15",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tablero",
+								"15"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tarea_create",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Tarea nadfss\",\r\n    \"descripcion\": \"Descriptcion tarea as\",\r\n    \"estado\":\"en progreso\", //OPCIONES: \"pendiente\", \"en progreso\", \"completada\"\r\n    \"id_tablero\": 151\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}apis/tarea",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tarea"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tarea_update",
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n    \"titulo\": \"Tarea update3\",\r\n    \"descripcion\": \"Descriptcion tarea 3232as\",\r\n    \"estado\": \"en progreso\",//OPCIONES: \"pendiente\", \"en progreso\", \"completada\"\r\n    \"fecha_creacion\": \"2025-01-13T20:36:43.936001-06:00\",\r\n    \"id_tablero\": 2\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}apis/tarea/100009",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tarea",
+								"100009"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tarea_delete",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}apis/tarea/100009",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tarea",
+								"100009"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "querys",
+			"item": [
+				{
+					"name": "tareas_list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}apis/tarea?page_size=100&page=5",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tarea"
+							],
+							"query": [
+								{
+									"key": "page_size",
+									"value": "100"
+								},
+								{
+									"key": "page",
+									"value": "5"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tarea_get",
+					"request": {
+						"auth": {
+							"type": "oauth2",
+							"oauth2": [
+								{
+									"key": "clientSecret",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "clientId",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "accessTokenUrl",
+									"value": "",
+									"type": "string"
+								},
+								{
+									"key": "grant_type",
+									"value": "client_credentials",
+									"type": "string"
+								},
+								{
+									"key": "password",
+									"value": "test",
+									"type": "string"
+								},
+								{
+									"key": "username",
+									"value": "test",
+									"type": "string"
+								},
+								{
+									"key": "client_authentication",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "addTokenTo",
+									"value": "header",
+									"type": "string"
+								},
+								{
+									"key": "tokenName",
+									"value": "facturedtest",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}apis/tarea/100",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tarea",
+								"100"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tableros_list",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}apis/tablero?page_size=5&page=2&con_tareas=0",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tablero"
+							],
+							"query": [
+								{
+									"key": "page_size",
+									"value": "5"
+								},
+								{
+									"key": "page",
+									"value": "2"
+								},
+								{
+									"key": "con_tareas",
+									"value": "0"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "tablero_get",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}apis/tablero/158",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"tablero",
+								"158"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reporte_tareas",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}apis/reportes/tareas",
+							"host": [
+								"{{base_url}}apis"
+							],
+							"path": [
+								"reportes",
+								"tareas"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "reporte_tareas_tablero",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/apis/reportes/tareas/2",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"apis",
+								"reportes",
+								"tareas",
+								"2"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "seeder",
+			"request": {
+				"auth": {
+					"type": "oauth2",
+					"oauth2": [
+						{
+							"key": "accessTokenUrl",
+							"value": "{{base_url}}/oauth/token/",
+							"type": "string"
+						},
+						{
+							"key": "clientId",
+							"value": "facturedtest",
+							"type": "string"
+						},
+						{
+							"key": "grant_type",
+							"value": "password_credentials",
+							"type": "string"
+						},
+						{
+							"key": "password",
+							"value": "facturedtest",
+							"type": "string"
+						},
+						{
+							"key": "username",
+							"value": "facturedtest",
+							"type": "string"
+						},
+						{
+							"key": "clientSecret",
+							"value": "facturedtest",
+							"type": "string"
+						},
+						{
+							"key": "tokenName",
+							"value": "facturedtest",
+							"type": "string"
+						},
+						{
+							"key": "client_authentication",
+							"value": "header",
+							"type": "string"
+						},
+						{
+							"key": "addTokenTo",
+							"value": "header",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"cantidad_tableros\":150,\r\n    \"cantidad_tareas\": 100000\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{base_url}}apis/seeder",
+					"host": [
+						"{{base_url}}apis"
+					],
+					"path": [
+						"seeder"
+					]
+				}
+			},
+			"response": []
+		}
+	],
+	"auth": {
+		"type": "oauth2",
+		"oauth2": [
+			{
+				"key": "refreshRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "tokenRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "authRequestParams",
+				"value": [],
+				"type": "any"
+			},
+			{
+				"key": "tokenName",
+				"value": "facturedtest",
+				"type": "string"
+			},
+			{
+				"key": "challengeAlgorithm",
+				"value": "S256",
+				"type": "string"
+			},
+			{
+				"key": "username",
+				"value": "facturedtest",
+				"type": "string"
+			},
+			{
+				"key": "password",
+				"value": "facturedtest",
+				"type": "string"
+			},
+			{
+				"key": "grant_type",
+				"value": "password_credentials",
+				"type": "string"
+			},
+			{
+				"key": "clientSecret",
+				"value": "facturedtest",
+				"type": "string"
+			},
+			{
+				"key": "clientId",
+				"value": "facturedtest",
+				"type": "string"
+			},
+			{
+				"key": "addTokenTo",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "client_authentication",
+				"value": "header",
+				"type": "string"
+			},
+			{
+				"key": "accessTokenUrl",
+				"value": "{{base_url}}/oauth/token/",
+				"type": "string"
+			}
+		]
+	},
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"packages": {},
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base_url",
+			"value": "http://localhost:8000",
+			"type": "string"
+		}
+	]
+}
