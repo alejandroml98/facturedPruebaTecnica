@@ -11,7 +11,6 @@ def on_message_received(ch, method, properties, body):
         mensaje = json.loads(body)
         tareas_transform_id_key(mensaje["tareas_data"])
         tableros_transform_id_key(mensaje["tableros_data"])
-        print(mensaje)
         tableros_collection_controller(mensaje)
         tareas_collection_controller(mensaje)
     except Exception as e:

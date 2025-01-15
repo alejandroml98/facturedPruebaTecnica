@@ -9,8 +9,8 @@ from .seeder import seed
 
 class SeederView(APIView):
     def post(self, request):
-        cantidad_tableros = request.data.get("cantidad_tableros",0)
-        cantidad_tareas = request.data.get("cantidad_tareas",0)
+        cantidad_tableros = int(request.data.get("cantidad_tableros",0))
+        cantidad_tareas = int(request.data.get("cantidad_tareas",0))
 
         if 0 in [cantidad_tableros, cantidad_tareas]:
             return Response({"status": "error", "description":"campos [cantidad_tableros, cantidad_tareas] son obligatorios"}, status=status.HTTP_400_BAD_REQUEST)

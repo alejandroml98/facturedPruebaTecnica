@@ -6,8 +6,8 @@ services:
       context: .
       dockerfile: ./dockerfiles/commandapp.dockerfile      
     command: bash "/apps/commandApp/entrypoint.sh"
-    ports:
-      - 8000:8000
+    expose:
+      - 8000
     volumes:
       - ./commandApp:/apps/commandApp
     environment:
@@ -46,8 +46,8 @@ services:
       context: .
       dockerfile: ./dockerfiles/queryapp.dockerfile      
     command: bash "/apps/queryApp/entrypoint.sh"
-    ports:
-      - 8001:8000
+    expose:
+      - 8000
     volumes:
       - ./queryApp:/apps/queryApp
     environment:
@@ -99,7 +99,7 @@ services:
       dockerfile: ./dockerfiles/apigateway.dockerfile      
     command: bash "/apps/ApiGateway/entrypoint.sh"
     ports:
-      - 8002:8000
+      - 8000:8000
     volumes:
       - ./ApiGateway:/apps/ApiGateway
     environment:

@@ -25,7 +25,7 @@ class RabbitmqConn:
         self.conn = connection
 
     def get_conn(self):
-        if None is self.conn:
+        if None is self.conn or self.conn.is_closed:
             self.create_conn()
         print("retornando conexion rabbitmq")
         return self.conn

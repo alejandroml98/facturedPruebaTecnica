@@ -11,6 +11,6 @@ RUN pip install pipenv
 WORKDIR /apps/ApiGateway
 
 # instalar dependencias de proyecto
-#COPY ./ApiGateway/requirements.txt /apps/ApiGateway/requirements.txt
+COPY ./ApiGateway/requirements.txt /apps/ApiGateway/requirements.txt
 
-#RUN pip install -r requirements.txt
+RUN pip install -r requirements.txt

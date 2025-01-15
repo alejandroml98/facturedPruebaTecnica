@@ -12,8 +12,8 @@ class RequestLoggingMiddleware:
 
         # Registrar la información
         print(f"Path solicitado: {path} | Método HTTP: {method}")
-        
-        request.path_info = "/apis/"
+        if str(path).startswith("/apis/"):
+            request.path_info = "/apis/"
 
 
         # Continuar con la cadena de middleware

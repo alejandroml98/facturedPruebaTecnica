@@ -5,5 +5,5 @@ from . import views
 urlpatterns = [
     #path("", views.index, name="index"),
     #URL tableros
-    path("", views.Prueba.as_view(), name="prueba"),
+    path("", views.Apis.as_view(), name="prueba"),
 ]

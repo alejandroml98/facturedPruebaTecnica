@@ -3,9 +3,13 @@ from rest_framework.response import Response # type: ignore
 from rest_framework.views import APIView # type: ignore
 from rest_framework import status
 
+from oauth2_provider.contrib.rest_framework import OAuth2Authentication, TokenHasReadWriteScope
+
 import requests
 
-class Prueba(APIView):
+class Apis(APIView):
+    authentication_classes = [OAuth2Authentication]
+    permission_classes = [TokenHasReadWriteScope]
     def get(self, request):
         url = "http://querysApp:8000"+ request.path
         query_params = request.query_params
@@ -19,7 +23,7 @@ class Prueba(APIView):
     def post(self, request):
         url = "http://commandsApp:8000"+ request.path
         query_params = request.query_params
-        respuesta =requests.post(url, data=request.data, params=query_params)
+        respuesta =requests.post(url, data=request.data, params=query_params,timeout=600)
         if respuesta.status_code in [200, 201]:
             return Response(respuesta.json())
         else:
@@ -28,7 +32,7 @@ class Prueba(APIView):
     def put(self, request):
         url = "http://commandsApp:8000"+ request.path
         query_params = request.query_params
-        respuesta =requests.put(url, data=request.data, params=query_params)
+        respuesta =requests.put(url, data=request.data, params=query_params, timeout=600)
         if respuesta.status_code == 200:
             return Response(respuesta.json())
         else:
@@ -37,7 +41,7 @@ class Prueba(APIView):
     def delete(self, request):
         url = "http://commandsApp:8000"+ request.path
         query_params = request.query_params
-        respuesta =requests.delete(url, data=request.data, params=query_params)
+        respuesta =requests.delete(url, data=request.data, params=query_params, timeout=600)
         if respuesta.status_code in [204]:
             print(respuesta)
             return Response({"info": "eliminado correctamente"}, respuesta.status_code)
